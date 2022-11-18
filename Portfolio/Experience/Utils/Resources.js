@@ -12,7 +12,6 @@ export default class Resources extends EventEmitter {
     this.rendered = this.experience.renderer;
 
     this.assets = assets;
-    console.log(this.assets);
 
     this.items = {};
     this.queue = this.assets.length;
@@ -25,7 +24,7 @@ export default class Resources extends EventEmitter {
     this.loaders = {};
     this.loaders.gltfLoader = new GLTFLoader();
     this.loaders.dracoLoader = new DRACOLoader();
-    this.loaders.dracoLoader.setDecoderPath("/draco/ ");
+    this.loaders.dracoLoader.setDecoderPath("/draco/");
     this.loaders.gltfLoader.setDRACOLoader(this.loaders.dracoLoader);
   }
 
@@ -55,15 +54,20 @@ export default class Resources extends EventEmitter {
         this.videoTexture[asset.name].mageFilter = THREE.NearestFilter;
         this.videoTexture[asset.name].generateMipmaps = true;
         this.videoTexture[asset.name].encoding = THREE.sRGBEncoding;
+
+        console.log({ this: this }, "else if");
+
+        this.singleAssetLoaded(asset, this.videoTexture[asset.name]);
       }
     }
   }
-  singleAssetLoader(asset, file) {
+  singleAssetLoaded(asset, file) {
     this.items[asset.name] = file;
     this.loaded++;
 
-    console.log({ file });
+    console.log("Asset is loading", { file });
     if (this.loaded === this.queue) {
+      console.log("all assets are done");
       this.emit("ready");
     }
   }
