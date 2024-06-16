@@ -36,12 +36,7 @@ export default class Room {
         });
       }
 
-      // console.log(child);
-
-      console.log({ childName: child.name });
-
       if (child.name === "Aquarium") {
-        // console.log(child);
         child.children[0].material = new THREE.MeshPhysicalMaterial();
         child.children[0].material.roughness = 0;
         child.children[0].material.color.set(0x549dd2);
@@ -99,10 +94,6 @@ export default class Room {
     this.actualRoom.add(rectLight);
 
     this.roomChildren["rectLight"] = rectLight;
-
-    // const rectLightHelper = new RectAreaLightHelper(rectLight);
-    // rectLight.add(rectLightHelper);
-    // console.log(this.room);
 
     this.scene.add(this.actualRoom);
     this.actualRoom.scale.set(0.11, 0.11, 0.11);

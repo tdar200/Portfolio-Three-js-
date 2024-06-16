@@ -15,6 +15,7 @@ import Controls from "./World/Controls.js";
 
 export default class Experience {
   static instance;
+
   constructor(canvas) {
     if (Experience.instance) {
       return Experience.instance;
@@ -30,8 +31,6 @@ export default class Experience {
     this.theme = new Theme();
     this.world = new World();
     this.preloader = new Preloader();
-
-    console.log({ exp: this.scene });
 
     this.preloader.on("enablecontrols", () => {
       this.controls = new Controls();
